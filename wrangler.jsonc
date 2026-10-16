@@ -1,0 +1,13 @@
+// 展示页部署:纯静态,只有 assets 没有 Worker 脚本。
+// bun run deploy(= 构建 + bunx wrangler deploy)。
+// dist 里的 MiSans 来自本地 public/fonts(不进仓库);没有字体时展示页回落系统字体。
+{
+	"$schema": "node_modules/wrangler/config-schema.json",
+	"name": "mikuro-ui",
+	"compatibility_date": "2026-08-25",
+	"assets": {
+		"directory": "./dist",
+		"not_found_handling": "single-page-application"
+	},
+	"routes": [{ "pattern": "mikuro-ui.chr.moe", "custom_domain": true }]
+}

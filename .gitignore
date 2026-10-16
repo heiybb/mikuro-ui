@@ -25,3 +25,6 @@ dist-ssr
 
 # MiSans 不进仓库,本地展示页用的字体放这里
 public/fonts/
+
+# wrangler 本地状态
+.wrangler/

@@ -13,7 +13,8 @@
     "dev": "vite",
     "build": "bun run check && vue-tsc -b && vite build",
     "preview": "vite preview",
-    "check": "bun scripts/check-palette.mjs src && bun scripts/check-raw-html.mjs src --skip src/components/ui --skip src/components/family"
+    "check": "bun scripts/check-palette.mjs src && bun scripts/check-raw-html.mjs src --skip src/components/ui --skip src/components/family",
+    "deploy": "bun run build && bunx wrangler deploy"
   },
   "peerDependencies": {
     "vue": "^3.5.40",
