@@ -1,0 +1,66 @@
+/* 页面底层:底色、触摸行为、横向溢出、滚动条。app 的 CSS 入口在 theme.css 之后引 */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  html {
+    /* 禁用 Chrome/Android 的横滑历史导航(返回由底部导航与弹窗手势处理) */
+    overscroll-behavior-x: none;
+    /* iOS 快速连点会触发双击缩放;manipulation 只禁双击缩放,
+       滚动与捏合放大(无障碍)不受影响。Android 本就不双击缩放 */
+    touch-action: manipulation;
+    /* 页面切换的 translateX 会把整页推出视口 16px,在经典滚动条的安卓
+       浏览器上撑出占位横向滚动条,挤压视口让固定导航跳动;裁掉横向溢出。
+       先写 hidden 兜底,支持 clip 的浏览器用 clip(不会创建滚动容器) */
+    overflow-x: hidden;
+    overflow-x: clip;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* 滚动条。只在有鼠标的设备上改:手机/平板的滚动条是浮层,平时根本不占位,
+   一旦给 ::-webkit-scrollbar 指定宽度,某些安卓 Chrome 会把它变回常驻的经典
+   滚动条,在 448px 的列里白吃掉十几像素。(pointer: fine) 把它们挡在外面。 */
+@media (pointer: fine) {
+  /* Firefox 只认这两个标准属性 */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) transparent;
+  }
+
+  /* Blink/WebKit:Chrome 121+ 起,标准属性一旦是非 auto 值就会让整套
+     ::-webkit-scrollbar 规则失效,所以这里先复位回 auto 再用伪元素——
+     伪元素能做圆角和两侧留白,标准属性做不到。
+     @supports 万一判错也只是退回上面那套细滚动条,不会变难看。 */
+  @supports selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: auto;
+      scrollbar-color: auto;
+    }
+
+    ::-webkit-scrollbar {
+      width: 12px;
+      height: 12px;
+    }
+
+    ::-webkit-scrollbar-track,
+    ::-webkit-scrollbar-corner {
+      background: transparent;
+    }
+
+    /* 透明边框 + background-clip 把滑块收窄到 6px,但点击热区仍是整条 12px */
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+      background-clip: padding-box;
+      border: 3px solid transparent;
+      border-radius: 999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover,
+    ::-webkit-scrollbar-thumb:active {
+      background-color: var(--scrollbar-thumb-hover);
+    }
+  }
+}

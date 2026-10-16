@@ -1,0 +1,28 @@
+/* MiSans(小米,免费商用,嵌入使用时要在 app 里注明用了 MiSans)。
+   字体文件不进本仓库(官方协议没写明能否单独再分发),由各 app 放在 public/fonts/:
+   misans-400/500/600/700.woff2,建议用 GB2312 常用集子集(每档约 900KB),缺字单字回落系统字体。
+   app 的 workbox globPatterns 要包含 woff2,PWA 预缓存后只在首装下载一次 */
+@font-face {
+  font-family: 'MiSans';
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/misans-400.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'MiSans';
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/misans-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'MiSans';
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/misans-600.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'MiSans';
+  font-weight: 700;
+  font-display: swap;
+  src: url('/fonts/misans-700.woff2') format('woff2');
+}

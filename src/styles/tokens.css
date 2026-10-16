@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════════════════
+   MIKURO UI · 家庭 app 设计令牌(单一来源)
+   日间暖米 / 夜间深蓝。
+   变量名沿用 shadcn-vue 的语义名(--background / --primary …),app 里的
+   bg-background、text-muted-foreground 这类类名不用改。
+   夜间由 <html class="dark"> 切换(跟随系统或用户在设置里指定,见 app 的 theme.ts)。
+   局部固定配色:容器加 class="dark" 就整块走夜间;夜间页面里要保持日间的区域加 class="light"。
+   app 里不许写死这些颜色(scripts/check-palette.mjs 在各 app build 开头检查)。
+   换配色时:改这里的值 → 把被换掉的旧值加进 check-palette.mjs 的 LEGACY_HEX →
+   各 app 升版本后跑检查,标了 mk-palette-literal 的字面值(theme-color 等)会被逐个点出来。
+   ═══════════════════════════════════════════════════════════════ */
+:root,
+.light {
+  --radius: 0.625rem;
+  /* 告诉浏览器当前配色:原生滚动条、光标、表单控件默认样式、过卷区画布
+     都跟着走。只声明单值而不是 light dark——主题由 .dark 类(跟随系统
+     或用户在设置里指定)决定,不能让浏览器自己按系统偏好再切一次 */
+  color-scheme: light;
+
+  /* ── 基础语义色:日间暖米 ── */
+  --background: #faf6ec;
+  --foreground: #20253a;
+  --card: #fffdf8;
+  --card-foreground: #20253a;
+  --popover: #fffdf8;
+  --popover-foreground: #20253a;
+  --primary: #20253a;
+  --primary-foreground: #faf6ec;
+  --secondary: #f6ecd8;
+  --secondary-foreground: #20253a;
+  --muted: #f6ecd8;
+  --muted-foreground: #737687;
+  --accent: #f6ecd8;
+  --accent-foreground: #20253a;
+  --destructive: oklch(0.577 0.245 27.325);
+  --border: #e4dac7;
+  --input: #e4dac7;
+  --ring: #737687;
+
+  /* ── 导航(底栏 / 侧栏)。激活态:浅米色胶囊底 + 深藏青图标文字(用户定稿) ── */
+  --nav-bg: #fffdf8;
+  --nav-border: #e5dccb;
+  --nav-inactive: #7d8190;       /* 底栏未选中 */
+  --nav-inactive-strong: #4a4f60; /* 侧栏未选中:桌面上字多,要更深才好读 */
+  --nav-active: #1d2742;
+  --nav-active-bg: #f1e5cf;
+  --nav-hover-bg: #f6efe2;       /* 只有侧栏(有鼠标)用 */
+
+  /* ── 滚动条:比 --border 再深一档才看得见,轨道透明 ── */
+  --scrollbar-thumb: #d3c5a6;
+  --scrollbar-thumb-hover: #b8a37c;
+
+  /* ── 月光色:安静的辅色面板。渐变 from → bg → to ── */
+  --moon-bg-from: #fff9ed;
+  --moon-bg: #f5f0e7;
+  --moon-bg-to: #eef0f4;
+  --moon-border: #9fa9c3;
+  --moon-accent: #7f8db7;
+  --moon-text: #202a45;
+  --moon-muted: #70768a;
+  --moon-well: #f2e6d1;          /* 面板里 outline 按钮的底色 */
+
+  /* ── 图表单系列色:明暗两底对比度都 ≥ 3:1(dataviz 校验过),两套主题同值 ── */
+  --chart-1: #d97706;            /* 琥珀 */
+  --chart-2: #6366f1;            /* 靛蓝 */
+  --chart-2-rgb: 99 102 241;
+  --chart-3: #0d9488;            /* 青绿 */
+}
+
+.dark {
+  color-scheme: dark;
+
+  /* ── 基础语义色:夜间深蓝 ── */
+  --background: #0f1420;
+  --foreground: #f3efe7;
+  --card: #181e2b;
+  --card-foreground: #f3efe7;
+  --popover: #181e2b;
+  --popover-foreground: #f3efe7;
+  --primary: #f3efe7;
+  --primary-foreground: #0f1420;
+  --secondary: #342f29;
+  --secondary-foreground: #f3efe7;
+  --muted: #342f29;
+  --muted-foreground: #a6a9b5;
+  --accent: #342f29;
+  --accent-foreground: #f3efe7;
+  --destructive: oklch(0.704 0.191 22.216);
+  --border: #4a4338;
+  --input: #4a4338;
+  --ring: #a6a9b5;
+
+  --nav-bg: #151a27;
+  --nav-border: #2a3040;
+  --nav-inactive: #8d92a2;
+  --nav-inactive-strong: #b6bac7;
+  --nav-active: #d9dfff;
+  --nav-active-bg: #303750;
+  --nav-hover-bg: #222839;
+
+  /* 夜间跟着背景走蓝灰,不用 --border 那个暖棕 */
+  --scrollbar-thumb: #3c445c;
+  --scrollbar-thumb-hover: #515b78;
+
+  /* 深燕麦 → 暖夜空灰 → 月光灰蓝 */
+  --moon-bg-from: #2b2923;
+  --moon-bg: #222536;
+  --moon-bg-to: #242b3d;
+  --moon-border: #667392;
+  --moon-accent: #8fa0c9;
+  --moon-text: #f3eddf;
+  --moon-muted: #b5b0a7;
+  --moon-well: #39342d;
+}

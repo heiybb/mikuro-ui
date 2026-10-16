@@ -1,0 +1,60 @@
+/* Mikuro 主题层:令牌 + 字体 + Tailwind 映射。app 在自己的 CSS 入口里:
+ *   @import "tailwindcss";  @import "tw-animate-css";
+ *   @import "<mikuro-ui>/src/styles/theme.css";
+ *   @import "<mikuro-ui>/src/styles/base.css";
+ *   @source "<mikuro-ui>/src/components";   (Tailwind 默认不扫 node_modules)
+ */
+@import "./tokens.css";
+@import "./fonts.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* 令牌 → Tailwind 颜色。组件源码只写 bg-primary / border-input 这类语义类,换肤只改 tokens.css */
+@theme inline {
+  --font-sans: 'MiSans', system-ui, -apple-system, 'Segoe UI', Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'Noto Sans CJK SC', sans-serif;
+  --font-heading: var(--font-sans);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-nav: var(--nav-bg);
+  --color-nav-border: var(--nav-border);
+  --color-nav-inactive: var(--nav-inactive);
+  --color-nav-inactive-strong: var(--nav-inactive-strong);
+  --color-nav-active: var(--nav-active);
+  --color-nav-active-bg: var(--nav-active-bg);
+  --color-nav-hover: var(--nav-hover-bg);
+
+  --color-moon: var(--moon-bg);
+  --color-moon-border: var(--moon-border);
+  --color-moon-accent: var(--moon-accent);
+  --color-moon-text: var(--moon-text);
+  --color-moon-muted: var(--moon-muted);
+  --color-moon-well: var(--moon-well);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+
+  /* 圆角刻度沿用 shadcn(--radius = 10px)。用法规则见 README「圆角」 */
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+}
