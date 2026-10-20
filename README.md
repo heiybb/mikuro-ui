@@ -48,6 +48,8 @@ CLI 生成的 `import { cn } from "cn"` 改成 `@mk/lib/utils`,并把它顺手�
 
 | 组件 | 说明 |
 |---|---|
+| Button | `loading`:提交中。转圈顶替原有图标,颜色不变灰,点击和回车都被吞掉(防重复提交),`aria-busy`。文字由 app 换(「保存中…」),库里不放文案。`as-child` 时只拦点击不画转圈 |
+| Progress | 进度条,`model-value` 0–`max`(默认 100),`null` 为进度未知 |
 | Select | `SelectTrigger size="sm"`(h-9,筛选条)/ 默认(h-11,表单);箭头离右边 12px。「全部」用哨兵值 `'all'`:Reka 的 SelectItem 不许空串当值,null 又和「没选」分不清 |
 | Table | `container-class` 加在外层滚动容器上(圆角卡片底、`max-h-*` 限高);表头 sticky、`bg-secondary` |
 | Toaster | `success-icon` / `error-icon` 传 app 自己的吉祥物图(手绘蜡笔风,按 20px 显示);不传是线性图标 |
@@ -90,7 +92,7 @@ MiSans(小米,免费商用;嵌入使用时要在 app 里注明用了 MiSans)。�
 ```jsonc
 // app 的 package.json
 "dependencies": {
-  "mikuro-ui": "github:heiybb/mikuro-ui#v0.1.0",
+  "mikuro-ui": "github:heiybb/mikuro-ui#v0.2.0",
   // 库的 peerDependencies 由 app 提供(全站只有一份):
   "vue": "^3.5", "reka-ui": "^2.10", "@vueuse/core": "^14", "vue-sonner": "^2"
 }

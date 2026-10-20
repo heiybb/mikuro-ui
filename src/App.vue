@@ -12,7 +12,7 @@ import {
   Card, CardAction, CardContent, CardDescription, CardFooter, CardHeader, CardTitle,
   Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogScrollContent, DialogTitle, DialogTrigger,
   Drawer, DrawerClose, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTitle, DrawerTrigger,
-  Input, Label, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue,
+  Input, Label, Progress, Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectSeparator, SelectTrigger, SelectValue,
   Separator, Slider, Table, TableBody, TableCell, TableHead, TableHeader, TableRow,
   Tabs, TabsContent, TabsList, TabsTrigger, Textarea, Toaster, Toggle, ToggleGroup, ToggleGroupItem,
   ActionTile, IconTile, ListRow,
@@ -32,7 +32,7 @@ const only = (params.get('only') ?? (openParam === 'select' ? 'select' : '')).sp
 const show = (id: string) => only.length === 0 || only.includes(id)
 
 const sections = [
-  ['tokens', '令牌'], ['type', '文字'], ['button', '按钮'], ['badge', '徽章'], ['input', '输入框'],
+  ['tokens', '令牌'], ['type', '文字'], ['button', '按钮'], ['progress', '进度条'], ['badge', '徽章'], ['input', '输入框'],
   ['select', '下拉'], ['slider', '滑块'], ['toggle', '开关按钮'], ['tabs', '标签页'], ['card', '卡片'],
   ['avatar', '头像'], ['separator', '分隔线'], ['dialog', '对话框'], ['alert', '确认框'], ['drawer', '抽屉'],
   ['toast', '提示'], ['patterns', '家庭组件'], ['toolbar', '筛选条与表格'],
@@ -49,6 +49,14 @@ const swatchGroups: Array<{ title: string; names: string[] }> = [
   { title: '图表', names: ['chart-1', 'chart-2', 'chart-3'] },
   { title: '滚动条', names: ['scrollbar-thumb', 'scrollbar-thumb-hover'] },
 ]
+
+const demoLoading = ref(false)
+const submitCount = ref(0)
+function fakeSubmit() {
+  submitCount.value += 1
+  demoLoading.value = true
+  setTimeout(() => (demoLoading.value = false), 2000)
+}
 
 const volume = ref([40])
 const range = ref([20, 70])
@@ -151,6 +159,18 @@ const rows = [
             <Button><PlusIcon />带图标</Button>
           </div>
           <Button size="lg" class="h-12 w-full text-lg">drawer 底部主按钮(现在 app 里的写法)</Button>
+          <!-- loading:点一下进入 2 秒提交中,期间再点无效(计数不涨) -->
+          <div class="flex flex-wrap items-center gap-2">
+            <Button :loading="demoLoading" @click="fakeSubmit">{{ demoLoading ? '保存中…' : `保存(已提交 ${submitCount} 次)` }}</Button>
+            <Button variant="outline" :loading="demoLoading" @click="fakeSubmit"><PlusIcon />{{ demoLoading ? '添加中…' : '添加' }}</Button>
+            <Button size="icon" variant="outline" :loading="demoLoading" aria-label="加" @click="fakeSubmit"><PlusIcon /></Button>
+            <Button loading>一直在提交</Button>
+          </div>
+        </ShowSection>
+
+        <ShowSection v-if="show('progress')" id="progress" title="进度条" note="modelValue 0–max;null 为进度未知">
+          <Progress :model-value="35" />
+          <Progress :model-value="80" class="h-1.5" />
         </ShowSection>
 
         <ShowSection v-if="show('badge')" id="badge" title="徽章">

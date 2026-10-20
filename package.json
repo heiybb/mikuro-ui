@@ -1,7 +1,7 @@
 {
   "name": "mikuro-ui",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "家庭 web app 共用的 Vue 组件库:暖米 / 夜蓝配色,shadcn-vue + Reka UI + Tailwind v4,以源码形式被 app 引用",
   "type": "module",
   "files": [
